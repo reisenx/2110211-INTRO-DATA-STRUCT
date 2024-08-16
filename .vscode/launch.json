@@ -3,6 +3,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "ex00e2",
+            "request": "launch",
+            "mainClass": "ex00e2",
+            "projectName": "2110211-INTRO-DATA-STRUC_7dcd22b5"
+        },
+        {
+            "type": "java",
             "name": "ex00e1",
             "request": "launch",
             "mainClass": "ex00e1",
