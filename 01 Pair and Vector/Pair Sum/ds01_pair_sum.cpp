@@ -15,20 +15,31 @@ int main()
         cin >> temp;
         A.push_back(temp);
     }
+    // Sort vector A
+    sort(A.begin(), A.end());
 
     // Check if the vector A has 2 value that A[i] + A[j] = sum
-    // Find sum - A[i] in vector A from index A.begin()+i+1 to A.end()
+    // Using Two Pointer Technique
     while(M--)
     {
+        int i = 0, j = A.size()-1;
         int sum;
         bool found = false;
         cin >> sum;
-        for(int i = 0; i < A.size(); i++)
+        while(i < j)
         {
-            if( find(A.begin()+i+1, A.end(), sum - A[i]) != A.end() )
+            if(A[i] + A[j] == sum)
             {
                 found = true;
                 break;
+            }
+            else if(A[i] + A[j] > sum)
+            {
+                j--;
+            }
+            else if(A[i] + A[j] < sum)
+            {
+                i++;
             }
         }
         if(found)
