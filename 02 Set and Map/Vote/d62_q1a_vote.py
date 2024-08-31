@@ -9,20 +9,9 @@ for i in range(N):
     else:
         name2vote[name] += 1
 
-if(namecount <= K):
-    print(min(name2vote.values()))
+scores = list(name2vote.values())
+scores.sort(reverse = True)
+if(len(scores) < K):
+    print(scores[-1])
 else:
-    vote2num = {}
-    for name, vote in name2vote.items():
-        if(vote not in vote2num):
-            vote2num[vote] = 1
-        else:
-            vote2num[vote] += 1
-    vote2num = sorted(vote2num.items())[::-1]
-    
-    total = 0
-    for vote,num in vote2num:
-        total += num
-        if(total >= K):
-            print(vote)
-            break
+    print(scores[K-1])

@@ -1,36 +1,27 @@
 #include<iostream>
+#include<vector>
 #include<map>
+#include<algorithm>
 using namespace std;
-int N,K, namecount = 0;
+int N,K;
 map<string,int> name2vote;
-map<int,int> vote2num;
+vector<int> scores;
 int main()
 {
     cin >> N >> K;
     while(N--)
     {
         string name;
-        if(name2vote.find(name) == name2vote.end())
-        {
-            name2vote[name] = 1;
-            namecount += 1;
-        }
-        else
-        {
-            name2vote[name] += 1;
-        }
+        cin >> name;
+        if(name2vote.find(name) == name2vote.end()) name2vote[name] = 1;
+        else name2vote[name] += 1;
     }
-
     for(auto it = name2vote.begin(); it != name2vote.end(); it++)
     {
-        int vote = *it->second;
-        if(name2vote.find(vote) != name2vote.end())
-        {
-            vote2num[vote] = 1;
-        }
-        else
-        {
-            vote2num[vote]++;
-        }
+        scores.push_back(it->second);
     }
+    sort(scores.begin(), scores.end());
+    reverse(scores.begin(), scores.end());
+    if(scores.size() < K) cout << scores[scores.size()-1];
+    else cout << scores[K-1];
 }
