@@ -4,23 +4,15 @@ using namespace std;
 
 void reverse(vector<int> &v,int a,int b)
 {
-    vector<int> NEW;
-    // Get data from vector v in index 0 to a-1
-    for(int i = 0; i < a; i++)
-    {
-        NEW.push_back(v[i]);
-    }
-    // Get data from vector v in index a to b in reverse order
-    for(int i = b; i >= a; i--)
-    {
-        NEW.push_back(v[i]);
-    }
-    // Get data from vector v in index b+1 to v.size()
-    for(int i = b+1; i < v.size(); i++)
-    {
-        NEW.push_back(v[i]);
-    }
-    //Replace vector
+    // Copy vector 'v' to vector 'NEW'
+    vector<int> NEW(v);
+    // Get value from index 0 to a-1
+    NEW.resize(a);
+    // push_back value from index a to b in reversed order
+    for(int i = b ; i >= a; i--) { NEW.push_back(v[i]); }
+    // push_back the remaining value
+    for(int i = b+1 ; i < v.size(); i++) { NEW.push_back(v[i]); }
+    // Overwrite new value to vector 'v'
     v = NEW;
 }
 
@@ -44,4 +36,5 @@ int main() {
     for (auto &x : v)
         cout << x << " ";
     cout << endl;
+    return 0;
 }

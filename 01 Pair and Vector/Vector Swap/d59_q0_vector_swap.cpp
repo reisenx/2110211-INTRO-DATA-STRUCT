@@ -3,28 +3,26 @@
 using namespace std;
 void vector_swap(vector<int> &v1, vector<int> &v2, int start1, int end1, int start2, int end2) 
 {
-    vector<int> new1(v1);
-    vector<int> new2(v2);
-    new1.resize(start1);
-    new2.resize(start2);
-    for(int i = start2; i < end2; i++)
-    {
-        new1.push_back(v2[i]);
-    }
-    for(int i = end1; i < v1.size(); i++)
-    {
-        new1.push_back(v1[i]);  
-    }
-    for(int i = start1; i < end1; i++)
-    {
-        new2.push_back(v1[i]);
-    }
-    for(int i = end2; i < v2.size(); i++)
-    {
-        new2.push_back(v2[i]);
-    }
-    v1 = new1;
-    v2 = new2;
+    // Copy vector 'v1' and 'v2' to new vectors
+    vector<int> NEW1(v1), NEW2(v2);
+    
+    // Get the item from index 0 to end1
+    NEW1.resize(start1);
+    // push_back the item from index start2 to end2
+    for(int i = start2; i < end2; i++) { NEW1.push_back(v2[i]); }
+    // push_back the item from index end1 to v1.size()
+    for(int i = end1; i < v1.size(); i++) { NEW1.push_back(v1[i]); }
+
+    // Get the item from index 0 to end2
+    NEW2.resize(start2);
+    // push_back the item from index start1 to end1
+    for(int i = start1; i < end1; i++) { NEW2.push_back(v1[i]); }
+    // push_back the item from index end2 to v2.size()
+    for(int i = end2; i < v2.size(); i++) {NEW2.push_back(v2[i]); }
+
+    // Overwrite vector 'v1' and 'v2' to new value
+    v1 = NEW1;
+    v2 = NEW2;
 }
 
 int main()

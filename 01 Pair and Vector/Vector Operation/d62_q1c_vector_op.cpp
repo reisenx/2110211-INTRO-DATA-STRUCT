@@ -2,67 +2,35 @@
 #include<vector>
 #include<algorithm>
 using namespace std;
-
-void VectorSort(vector<int> &v)
-{
-    sort(v.begin(), v.end());
-}
-void ReversedVector(vector<int> &v)
-{
-    vector<int> NEW;
-    for(int i = v.size()-1; i>=0; i--)
-    {
-        NEW.push_back(v[i]);
-    }
-    v = NEW;
-}
-void ReversedVectorSort(vector<int> &v)
-{
-    VectorSort(v);
-    ReversedVector(v);
-}
-void RemoveData(vector<int> &v, int index)
-{
-    v.erase(v.begin() + index);
-}
-
+int Q;
+vector<int> v;
 int main()
 {
-    string command;
-    int value, Q;
-    vector<int> v;
-
+    // Make std::cin and std::cout faster
+    std::ios_base::sync_with_stdio(false); std::cin.tie(0);
+    // Input number of operations
     cin >> Q;
     while(Q--)
     {
+        // Get command
+        string command;
         cin >> command;
-        if(command == "pb")
-        {
-            cin >> value;
-            v.push_back(value);
-        }
-        else if(command == "sa")
-        {
-            VectorSort(v);
-        }
+        // Command: pb x (push_back the value x to a vector)
+        if(command == "pb") { int x; cin >> x; v.push_back(x); }
+        // Command: sa (sort the vector in ascending order)
+        else if(command == "sa") sort(v.begin(), v.end());
+        // Command: sd (sort the vector in descending order)
         else if(command == "sd")
         {
-            ReversedVectorSort(v);
+            sort(v.begin(), v.end());
+            reverse(v.begin(), v.end());
         }
-        else if(command == "r")
-        {
-            ReversedVector(v);
-        }
-        else if(command == "d")
-        {
-            cin >> value;
-            RemoveData(v, value);
-        }
+        // Command: r (reverse the vector)
+        else if(command == "r") reverse(v.begin(), v.end());
+        // Command: d i (erase the item in index i from a vector)
+        else if(command == "d") { int i; cin >> i; v.erase(v.begin()+i); }
     }
-
-    // Output
-    for(auto &x : v)
-    {
-        cout << x << " ";
-    }
+    // Output all items in vector
+    for(auto &x : v) { cout << x << " "; }
+    return 0;
 }

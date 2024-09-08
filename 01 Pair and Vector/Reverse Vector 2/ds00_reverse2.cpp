@@ -4,25 +4,18 @@ using namespace std;
 
 void reverse(vector<int> &v, vector<int>::iterator a, vector<int>::iterator b)
 {
-    int front = a - v.begin();
-    int end = b - v.begin() - 1;
-    vector<int> NEW;
-    // Get data from vector v in index 0 to a-1
-    for(int i = 0; i < front; i++)
-    {
-        NEW.push_back(v[i]);
-    }
-    // Get data from vector v in index a to b in reverse order
-    for(int i = end; i >= front; i--)
-    {
-        NEW.push_back(v[i]);
-    }
-    // Get data from vector v in index b+1 to v.size()
-    for(int i = end+1; i < v.size(); i++)
-    {
-        NEW.push_back(v[i]);
-    }
-    //Replace vector
+    // Convert iterator variable into an integer
+    int A = a - v.begin();
+    int B = b - v.begin();
+    // Copy vector 'v' to a new vector
+    vector<int> NEW(v);
+    // Get the value from index 0 to a-1
+    NEW.resize(A);
+    // push_back the value from index a to b-1 in reversed order
+    for(int i = B-1; i >= A; i--) { NEW.push_back(v[i]); }
+    // push_back the remaining value
+    for(int i = B; i < v.size(); i++) { NEW.push_back(v[i]); }
+    // Overwrite new value to vector 'v'
     v = NEW;
 }
 
@@ -48,4 +41,5 @@ int main() {
         cout << x << " ";
     }
     cout << endl;
+    return 0;
 }

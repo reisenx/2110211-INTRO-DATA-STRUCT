@@ -4,25 +4,20 @@
 using namespace std;
 int M,N;
 set<int> A,B,C;
-
 int main()
 {
-    cin >> M >> N;
-    while(M--)
-    {
-        int temp;
-        cin >> temp;
-        A.insert(temp);
-    }
-    while(N--)
-    {
-        int temp;
-        cin >> temp;
-        B.insert(temp);
-    }
+    // Make std::cin and std:: cout faster
+    ios_base::sync_with_stdio(false); cin.tie(0);
+
+    // Input vector A and B
+    cin >> N >> M;
+    for(int i = 0; i < N; i++) { int temp; cin >> temp; A.insert(temp); }
+    for(int i = 0; i < M; i++) { int temp; cin >> temp; B.insert(temp); }
+
+    // Find intersection of vector A and B and put the value in vector C
     set_intersection(A.begin(), A.end(), B.begin(), B.end(), inserter(C, C.begin()));
-    for(auto it = C.begin(); it != C.end(); it++)
-    {
-        cout << *it << " ";
-    }
+
+    // Output all items in vector C
+    for(auto &x : C) { cout << x << " "; }
+    return 0;
 }
