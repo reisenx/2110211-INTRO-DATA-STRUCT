@@ -1,27 +1,38 @@
 #include<iostream>
-#include<map>
-#include<set>
 #include<vector>
-#include<algorithm>
+#include<set>
+#include<queue>
 using namespace std;
 int n,m;
-vector<int> ReceiveCard, MaxPower;
+set<pair<int,int>> MinOfMax;
 int main()
 {
+    // Make std::cin and std::cout faster
     std::ios_base::sync_with_stdio(false); std::cin.tie(0);
+
     // Initialize
     cin >> n >> m;
-    MaxPower.assign(m,1);
-    ReceiveCard.resize(n);
+    vector<int> MaxPower(m,1);
+    for(int i = 0; i < m; i++) MinOfMax.insert(make_pair(1,i));
 
     // Input Card Power
+    vector<int> ReceiveCard(n);
     for(int i = 0; i < n; i++) { cin >> ReceiveCard[i]; }
     
+    // Input Card Type
     for(int i = 0; i < n; i++)
     {
         int type;
         cin >> type;
-        if(ReceiveCard[i] > MaxPower[type]) MaxPower[type] = ReceiveCard[i];
-        cout << *(min_element(MaxPower.begin(), MaxPower.end())) << " ";
+        // Modify data when that card type has new max power
+        if(ReceiveCard[i] > MaxPower[type])
+        {
+            MinOfMax.erase(make_pair(MaxPower[type], type));
+            MaxPower[type] = ReceiveCard[i];
+            MinOfMax.insert(make_pair(MaxPower[type], type));
+        }
+        // Find min of max
+        cout << (MinOfMax.begin())->first << " ";
     }
+    return 0;
 }
