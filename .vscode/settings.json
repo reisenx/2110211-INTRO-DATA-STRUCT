@@ -148,7 +148,8 @@
     "typeinfo": "cpp",
     "valarray": "cpp",
     "variant": "cpp",
-    "d65_q1b_cross_2d": "cpp"
+    "d65_q1b_cross_2d": "cpp",
+    "queue": "cpp"
   },
   "C_Cpp.errorSquiggles": "enabled"
 }

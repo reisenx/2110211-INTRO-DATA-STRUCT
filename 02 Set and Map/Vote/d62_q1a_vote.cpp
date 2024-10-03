@@ -1,9 +1,11 @@
 #include<iostream>
+#include<vector>
 #include<map>
+#include<algorithm>
 using namespace std;
-int N,K,uniqueName = 0;
+int N,K;
 map<string,int> name2vote;
-map<int,int> vote2count;
+vector<int> scores;
 int main()
 {
     // Input
@@ -13,44 +15,17 @@ int main()
         // Input name
         string name;
         cin >> name;
-
-        // Manage data in vote2name, uniqueName and vote2count
-        if(name2vote.find(name) == name2vote.end())
-        {
-            // Add name in name2vote
-            name2vote[name] = 1;
-            // Increase uniqueName by 1
-            uniqueName++;
-            // Manage vote2count[1]
-            if(vote2count.size() == 0) vote2count[1] = 1;
-            else vote2count[1]++;
-        }
-        else
-        {
-            // Add vote in name2vote
-            name2vote[name]++;
-            // Decrease vote2count[score] by 1 ('score' is an old vote)
-            int score = name2vote[name];
-            vote2count[score]--;
-            // Increase vote2count[score+1] by 1
-            if(vote2count.find(score+1) == vote2count.end()) vote2count[score+1] = 1;
-            else vote2count[score+1]++;
-        }
+        // Increase vote by 1
+        if(name2vote.find(name) == name2vote.end()) name2vote[name] = 1;
+        else name2vote[name] += 1;
     }
+    // Loop get score in each item in name2vote and push_back to scores 
+    for(auto &x : name2vote) { scores.push_back(x.second); }
+    // Sort the scores
+    sort(scores.begin(), scores.end());
 
-    // Output
-    // Case 1: uniqueName <= K (Output the lowest score)
-    if(uniqueName <= K) cout << (vote2count.begin())->first;
-    // Case 2: uniqueName > K
-    else
-    {
-        // Loop find the score until sumCount >= K
-        int sumCount = 0;
-        for(auto it = vote2count.rbegin(); it != vote2count.rend(); it++)
-        {
-            sumCount += it->second;
-            if(sumCount >= K) { cout << it->first; break; }
-        }
-    }
-    return 0;
+    // Case 1: Candidates is less than K
+    if(scores.size() < K) cout << scores[0];
+    // Case 2: Candidates is more than K
+    else cout << scores[scores.size() - K];
 }
