@@ -6,37 +6,48 @@
 
 template <typename T>
 size_t CP::stack<T>::size() const {
-  //write your code here
+  // Return size of std::vector
+  return v.size();
 }
 
 template <typename T>
 const T& CP::stack<T>::top() const {
-  //write your code here
+  // Return an element at the end of a vector
+  return *(v.rbegin());
 }
 
 template <typename T>
 void CP::stack<T>::push(const T& element) {
-  //write your code here
+  // Use push_back()
+  v.push_back(element);
 }
 
 template <typename T>
 void CP::stack<T>::pop() {
-  //write your code here
+  // Use pop_back()
+  v.pop_back();
 }
 
 template <typename T>
 void CP::stack<T>::deep_push(const T& element, int depth) {
-  //write your code here
+  // Use insert() but the position is size - depth
+  // Example: deep_push(4,3) to [0,1,2] is [4,0,1,2]
+  // Example: deep_push(4,1000) to [0,1,2] is [4,0,1,2] 
+  int pos = v.size() - depth;
+  pos = std::max(0, pos);
+  v.insert(v.begin() + pos, element);
 }
 
 template <typename T>
 void CP::stack<T>::multi_push(const std::vector<T> &w) {
-  //write your code here
+  // Use for loop in 'w' and push_back to vector v
+  for(auto &x : w) { v.push_back(x); }
 }
 
 template <typename T>
 void CP::stack<T>::pop_until(const T& e) {
-  //write your code here
+  // This function will pop the stack until top() == e or stack is empty
+  while(top() != e && v.size() > 0) { pop(); }
 }
 
 #endif

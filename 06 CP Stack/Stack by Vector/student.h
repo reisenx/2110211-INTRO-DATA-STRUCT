@@ -6,22 +6,26 @@
 
 template <typename T>
 size_t CP::stack<T>::size() const {
-  //write your code here
+  // Return size of std::vector
+  return v.size();
 }
 
 template <typename T>
 const T& CP::stack<T>::top() const {
-  //write your code here
+  // Return element at the end of the vector
+  return *(v.rbegin());
 }
 
 template <typename T>
 void CP::stack<T>::push(const T& element) {
-  //write your code here
+  // Use push_back()
+  v.push_back(element);
 }
 
 template <typename T>
 void CP::stack<T>::pop() {
-  //write your code here
+  // Use pop_back()
+  v.pop_back();
 }
 
 #endif

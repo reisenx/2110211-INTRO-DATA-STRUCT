@@ -19,7 +19,7 @@ int main() {
       scanf("%d", &v);
       s.push(v);
     } else if (c == 'o') {
-       s.pop();
+      s.pop();
     } else if (c == 'p') {
       s.print();
     } else if (c == 'd') {
