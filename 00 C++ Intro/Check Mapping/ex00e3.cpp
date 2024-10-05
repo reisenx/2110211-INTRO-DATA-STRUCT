@@ -1,25 +1,30 @@
 #include<iostream>
 #include<set>
 using namespace std;
-int n, MIN, MAX;
-set<int> A;
+int n;
+bool isPermutation = true;
+set<int> S;
 int main ()
 {
+    // This makes std::cin and std::cout faster
+    ios_base::sync_with_stdio(false); cin.tie(0);
+
+    // Input numbers
     cin >> n;
-    for(int i=0; i<n; i++)
+    for(int i = 0; i < n; i++)
     {
-        int temp;
-        cin >> temp;
-        if(i == 0)
-        {
-            MIN = temp;
-            MAX = temp;
-        }
-        if(temp > MAX) MAX = temp;
-        else if(temp < MIN) MIN = temp;
-        A.insert(temp);
+        int num;
+        cin >> num;
+        // If num < 1, so S is not a permutation
+        if(num < 1) { isPermutation = false; break; }
+        // If num > 1, so S is not permutation
+        if(num > n) { isPermutation = false; break; }
+        // Insertion to a set return a pair<iterator, bool>
+        // boolean item is false if the insertion is not successful (Duplicate detected)
+        auto data = S.insert(num);
+        if(!data.second) { isPermutation = false; break; }
     }
-    if(MIN < 1 || MAX > n) cout << "NO";
-    else if(A.size() != n) cout << "NO";
-    else cout << "YES";
+    if(isPermutation) cout << "YES";
+    else cout << "NO";
+    return 0;
 }
