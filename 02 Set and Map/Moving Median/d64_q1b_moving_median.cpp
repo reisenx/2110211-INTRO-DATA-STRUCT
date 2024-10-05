@@ -4,31 +4,36 @@
 #include<algorithm>
 using namespace std;
 int n,w;
-queue<int> tempErase;
+queue<pair<int, multiset<int>::iterator>> tempErase;
 multiset<int> S;
-multiset<int>::iterator mid;
 
 int main()
 {
+    // This makes std::cin and std::cout faster
     std:ios_base::sync_with_stdio(false); std::cin.tie(0);
 
+    // Input n (amount of inputs) and w (size of each subset - 1)
     cin >> n >> w;
     for(int i = 0; i < n; i++)
     {
+        // Input number
         int num;
         cin >> num;
-        if(i < w)
+        // Insert num to multiset S;
+        multiset<int>::iterator it = S.insert(num);
+        // Push new element to a queue
+        tempErase.push(make_pair(num, it));
+        
+        // If subset has a size of w+1
+        if(S.size() == w+1)
         {
-            S.insert(num);
-            tempErase.push(num);
-        }
-        if(i == w) mid = next(S.begin(), w/2);
-        if(i >= w)
-        {
-            S.insert(num);
-            tempErase.push(num);
-            cout << *mid << " ";
-            S.erase(tempErase.front());
+            // Find median iterator
+            multiset<int>::iterator median = next(S.begin(), w/2);
+            // Output a median value
+            cout << *median << " ";
+            // Remove element by using iterator
+            S.erase(tempErase.front().second);
+            // Remove front element of a queue
             tempErase.pop();
         }
     }

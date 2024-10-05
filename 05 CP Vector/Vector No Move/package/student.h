@@ -15,7 +15,7 @@ T& CP::vector_no_move<T>::operator[](int idx) {
 template <typename T>
 void CP::vector_no_move<T>::expand_hook() {
   // aux is a vector<int> that contains mCap of each expand
-  // Example: aux = [4,16,4]
+  // Example: aux = [4,6,14]
   aux.push_back(mCap);
 }
 
