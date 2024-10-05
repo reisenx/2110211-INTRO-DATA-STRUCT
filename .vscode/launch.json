@@ -3,6 +3,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "d64_q3a_queue_check",
+      "request": "launch",
+      "mainClass": "d64_q3a_queue_check",
+      "projectName": "2110211-INTRO-DATA-STRUCT_600382f3"
+    },
+    {
+      "type": "java",
       "name": "d62_q1a_punch",
       "request": "launch",
       "mainClass": "d62_q1a_punch",
