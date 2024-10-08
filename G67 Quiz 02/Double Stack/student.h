@@ -28,7 +28,9 @@ The solution is to balance the stack so both stacks is not empty
 So we will get stack_a = [4,5] and stack_b = [3,2,1]
 And now we can using top(), pop(), bottom() or pop_bottom() for multiple times */
 
-// Create Balancing stack Method
+// Create Balancing stack Method (Move stack_a to stack_b)
+// Example: stack = [1,2,3,4,5] | stack_a = [1,2,3,4,5] | stack_b = []
+// After balanceStack() got stack_a = [4,5] and stack_b = [3,2,1]
 template <typename T>
 void balanceStack(std::stack<T> &stack_a, std::stack<T> &stack_b) {
 	std::stack<T> temp;
