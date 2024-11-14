@@ -1,4 +1,4 @@
-*
+/*
 TASK: ds55b_quiz1_photolist
 */
 
@@ -192,9 +192,31 @@ class list
         std::cout << "prev POINTER ERROR" << std::endl;
       }
     }
-
+    /*  Playlist Management
+        1.) Get iterator to insert
+        2.) Get iterator of each element to reorder
+        3.) Insert and erase nodes
+    */
     void reorder(int pos,std::vector<int> selected) {
-      //write your code only here
+      // Find iterator to insert
+      iterator posItr = begin();
+      while(pos--) { posItr++; }
+      // Create a vector to contains all node to reorder
+      std::vector<iterator> nodes;
+      iterator node = begin();
+      int j = 0;
+      for(int i = 0; i < mSize; i++)
+      {
+        if(j >= selected.size()) break;
+        if(i == selected[j]) { nodes.push_back(node); j++; }
+        node++;
+      }
+      // Insert and erase each node in nodes
+      for(auto &node : nodes)
+      {
+        insert(posItr, *node);
+        erase(node);
+      }
     }
 
 };
