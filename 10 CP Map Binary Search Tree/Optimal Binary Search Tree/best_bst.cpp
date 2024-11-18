@@ -329,17 +329,39 @@ class map_bst
 
 }
 
-//you can add other function as well BUT CANNOT MODIFY MAIN nor map_bst class
+/*  ---------- Optimal Binary Search Tree ----------
+    Example: k = 3
+    > We need to insert keys in sequence [4,2,6,1,3,5,7] to generate best binary search tree
+    > Generate the key by using (left + right)/2
+          4        | 4 = (0+8)/2
+      2       6    | 2 = (0+4)/2 | 6 = (4+8)/2
+    1   3   5   7  | 1 = (0+2)/2 | 3 = (2+4)/2 | 5 = (4+6)/2 | 7 = (6+8)/2
+*/
 
-void gen_best_bst(int n,CP::map_bst<int,int> &bst) {
-  //write your code here
-  //you can create additional function
-  //but you cannot modify main or the map_bst class
+void generate(CP::map_bst<int,int> &bst, int left, int right, int currentLevel, int level)
+{
+  // Stop the process, when current level of a tree exceeds
+  if(currentLevel > level) return;
+  // Insert the key in current level of a tree
+  int middle = (left + right)/2;
+  bst[middle] = 69;
+  // Insert the key in the next level of a tree, by calling itself
+  generate(bst, left, middle, currentLevel + 1, level);
+  generate(bst, middle, right, currentLevel + 1, level);
+}
 
-  // this is the example code of adding 1..n to the bst in ascending order
-  for (int i = 1;i <= n;i++) {
-    bst[i] = 100;
-  }
+int treeLevel(int n) {
+  int level = 0;
+  n += 1;
+  while(n > 1) { n /= 2; level++; }
+  return level;
+}
+
+void gen_best_bst(int n, CP::map_bst<int,int> &bst) {
+  // Find level of the tree
+  int level = treeLevel(n);
+  // Generate keys
+  generate(bst, 0, n+1, 1, level);
 }
 
 int main() {
