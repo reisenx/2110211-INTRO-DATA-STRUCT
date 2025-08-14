@@ -5,7 +5,12 @@
 using namespace std;
 
 void hash_to_vector(unordered_map<int,string> hash, vector<int> &key, vector<string> &value) {
-  //write your code only here
+  // Iterate from begin to end in unordered_map
+  for(auto it = hash.begin(); it != hash.end(); it++)
+  {
+    key.push_back(it->first); // key of unordered_map
+    value.push_back(it->second); // value of unordered_map
+  }
 }
 
 int main() {
